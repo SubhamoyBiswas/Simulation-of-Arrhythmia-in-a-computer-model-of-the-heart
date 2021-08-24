@@ -1,3 +1,6 @@
+"""Please keep the input files for the times of activation of nodes in all cases under a single folder."""
+
+"""Inporting the necessary modules"""
 import numpy as np
 import math
 import matplotlib.pyplot as plt
@@ -9,9 +12,9 @@ from mpl_toolkits import mplot3d
 import csv
 from scipy.signal import find_peaks
 from sklearn.neighbors import KernelDensity
+"""=========================================================================================================================================================================="""
 
-"""Please keep the input files for the times of activation of nodes in all cases under a single folder."""
-
+"""Input portion begins"""
 node_paired_unpaired={}
 clusters_case={}
 no_info_nodes={}
@@ -50,7 +53,6 @@ csvFile.close()
 node_positions=np.array(node_pos)
 print("Node positions data retrived...")
 
-
 tri_list=[]
 df1=open(in_triangles, 'r')
 dfl=df1.readline()
@@ -71,6 +73,11 @@ with open(f'{output_path}/TRIANGLES.csv', 'w+') as csvFile:
         writer.writerow(i)
 csvFile.close()
 print("Data for triangular mesh of three closest nodes retrieved...")
+
+"""Input portion ends"""
+"""==========================================================================================================================================================================="""
+
+"""Output and function portion begins"""
 
 def retrieval(filename):
     file_df=np.fromfile(filename, np.int32).reshape((-1,2))
