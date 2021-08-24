@@ -77,7 +77,7 @@ print("Data for triangular mesh of three closest nodes retrieved...")
 """Input portion ends"""
 """==========================================================================================================================================================================="""
 
-"""Output and function portion begins"""
+"""Function definition section begins"""
 
 def retrieval(filename):
     file_df=np.fromfile(filename, np.int32).reshape((-1,2))
@@ -470,8 +470,11 @@ def cluster_analysis():
     plt.figure(figsize=(14, 10), dpi=400)
     plt.plot(np.linspace(min(size_cl), max(size_cl), 20000).reshape(-1, 1), pdf_prob_size, 'r')
     plt.savefig(f'{output_path}/cluster_size_distribution KDE.png')
-                
     
+"""Function definition section ends"""
+"""=========================================================================================================================================================================="""
+
+"""Function calling and output section"""
 main_controller(threshold_for_neighbours_space, node_positions, tri_list)
 cluster_analysis()
         
