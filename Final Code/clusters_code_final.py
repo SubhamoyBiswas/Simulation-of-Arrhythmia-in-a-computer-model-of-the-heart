@@ -151,7 +151,15 @@ def paired_unpaired(matrix_set, node, case, ln_activ_time, ln_nodes, nonln_activ
                   "nonln_activ_time" = list of all activation times of all nodes in the given case under the non-linear model of simulation
                   "nonln_nodes" = list of nodes getting activated under non-linear model of simulation
     2. Returns: None
-    3. Use: 
+    3. Use: The rows of the "matrix_set" correspond to each linear activation time of the given node and the columns of the matrix correspond to each non-linear activation time.
+            The condition for finding the mutual nearest neighbour (MNN) pairs is: 
+                "if the minimum value in the ith row of the matrix is also located on the jth column and if the minimum element in jth column lies in the ith row,
+                then Li and Nj form MNN pairs of the form (Li, Nj)"
+            Using this condition, a list of all such MNN pairs can be obtained for the node.
+            The remaining instants, whether for linear or nonlinear model are all unpaired and are considered separately.
+            The function finally updates the mother variable "node_paired_unpaired".
+            "node_paired_unpaired is a dictionary whose keys are the case no.s and the values are dictionaries.
+            Each such sub-dictionary conatains the key as the node no.s under each case, and its value as the data of the MNN pairs, unpaired linear and unpaired non-linear times.            
     """
     node_paired_unpaired[case][node]={'paired':[], 'unpaired linear':[], 'unpaired non-linear':[]}
     paired_linear_activ_time_instants, paired_nonlinear_activ_time_instants=[], []
