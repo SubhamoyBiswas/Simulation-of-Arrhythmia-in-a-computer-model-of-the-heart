@@ -80,6 +80,13 @@ print("Data for triangular mesh of three closest nodes retrieved...")
 """Function definition section begins"""
 
 def retrieval(filename):
+    """
+    The salient features of the function "retrieval" are:
+    1. Argument: "filename" = It stores the path name of the file containing the data of the linear/non-linear activation times for all the nodes for a particular case dataset
+    2. Returns: (a) "file_activ_time" = contains the list of activation times of all nodes under linear/non-linear model
+                (b) "file_nodes" = conatins the list of all nodes corresponding to the activation times in linear/ non-linear model
+    3. Use: The function reads the given file for the given case under linear/non-linear models and returns the list of nodes and their corresponding times of activation found
+    """
     file_df=np.fromfile(filename, np.int32).reshape((-1,2))
     file_nodes=file_df[:,0]
     file_activ_time=file_df[:,1]/1000
@@ -87,6 +94,36 @@ def retrieval(filename):
 
 
 def distance_matrix(ln_array, nonln_array, lnt, nonlnt, node, case, ln_activ_time, ln_nodes, nonln_activ_time, nonln_nodes):
+    """
+    The salient features of the function "retrieval" are:
+    1. Arguments: "ln_array" = list of linear activation times of the given node of the given case
+                  "nonln_array" = list of non-linear activation times of the given node of the given case
+                  "lnt" = stores the size of the array "ln_array"
+                  "nonlnt" = stores the size of the array "nonln_array"
+                  "node" = the index of the node of the given case under study
+                  "case" = the case number under study
+                  "ln_activ_time" = list of all activation times of all nodes in the given case under the linear model of simulation
+                  "ln_nodes" = list of nodes getting activated under linear model of simulation
+                  "nonln_activ_time" = list of all activation times of all nodes in the given case under the non-linear model of simulation
+                  "nonln_nodes" = list of nodes getting activated under non-linear model of simulation
+    2. Returns: None
+    3. Use: For a given node of a given case, let the linear activation times be L1, L2, L3, ...., Lp and let the non-linear times be N1, N2, N3, ...., Nq.
+            Then the function "distance_matrix" creates a table as follows:
+            _________________________________________________________________
+           |     |     N1    |     N2    |     N3    |..........|     Nq     |
+           |=================================================================|
+           | L1  |  |L1-N1|  |  |L1-N2|  |  |L1-N3|  |..........|  |L1-Nq|   |
+           | L2  |  |L2-N1|  |  |L2-N2|  |  |L2-N3|  |..........|  |L2-Nq|   |
+           | L3  |  |L3-N1|  |  |L3-N2|  |  |L3-N3|  |..........|  |L3-Nq|   |
+           | .   |    ...    |    ...    |    ...    |..........|    ...     |
+           | .   |    ...    |    ...    |    ...    |..........|    ...     |
+           | .   |    ...    |    ...    |    ...    |..........|    ...     |
+           | Lp  |  |Lp-N1|  |  |Lp-N2|  |  |Lp-N3|  |..........|  |Lp-Nq|   |
+           |_____|___________|___________|___________|__________|____________|
+            
+            where, |Li-Nj| = absolute difference between the ith linear activation time and jth non-linear activation time.
+            The function "distance_matrix" nows transfers control to the function "paired_unpaired" using this matrix created.
+    """
     """The function distance_matrix takes the node no. and its list of linear and non-linear activations and find all possible absolute difference between the instants."""
     ln_matrix, nonln_matrix=[], []
     ln_array=list(ln_array.reshape((1, lnt)))
