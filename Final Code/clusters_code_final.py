@@ -143,7 +143,7 @@ def distance_matrix(ln_array, nonln_array, lnt, nonlnt, node, case, ln_activ_tim
 def paired_unpaired(matrix_set, node, case, ln_activ_time, ln_nodes, nonln_activ_time, nonln_nodes):
     """
     The salient features of the function "paired_unpaired" are:
-    1. Arguments: "matrix_set" = matrix table of absolute differences between all the linear and non-linear activation times of the given node obtained from function "distance_matrix"
+    1. Arguments: "matrix_set" = matrix table of absolute differences between all linear and non-linear activation times of the given node obtained from function "distance_matrix"
                   "node" = index of the node of the particular case under study
                   "case" = the case number under study
                   "ln_activ_time" = list of all activation times of all nodes in the given case under the linear model of simulation
