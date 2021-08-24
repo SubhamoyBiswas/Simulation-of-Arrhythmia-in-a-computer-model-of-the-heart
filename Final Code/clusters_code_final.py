@@ -95,7 +95,7 @@ def retrieval(filename):
 
 def distance_matrix(ln_array, nonln_array, lnt, nonlnt, node, case, ln_activ_time, ln_nodes, nonln_activ_time, nonln_nodes):
     """
-    The salient features of the function "retrieval" are:
+    The salient features of the function "distance_matrix" are:
     1. Arguments: "ln_array" = list of linear activation times of the given node of the given case
                   "nonln_array" = list of non-linear activation times of the given node of the given case
                   "lnt" = stores the size of the array "ln_array"
@@ -109,22 +109,21 @@ def distance_matrix(ln_array, nonln_array, lnt, nonlnt, node, case, ln_activ_tim
     2. Returns: None
     3. Use: For a given node of a given case, let the linear activation times be L1, L2, L3, ...., Lp and let the non-linear times be N1, N2, N3, ...., Nq.
             Then the function "distance_matrix" creates a table as follows:
-            _________________________________________________________________
-           |     |     N1    |     N2    |     N3    |..........|     Nq     |
-           |=================================================================|
-           | L1  |  |L1-N1|  |  |L1-N2|  |  |L1-N3|  |..........|  |L1-Nq|   |
-           | L2  |  |L2-N1|  |  |L2-N2|  |  |L2-N3|  |..........|  |L2-Nq|   |
-           | L3  |  |L3-N1|  |  |L3-N2|  |  |L3-N3|  |..........|  |L3-Nq|   |
-           | .   |    ...    |    ...    |    ...    |..........|    ...     |
-           | .   |    ...    |    ...    |    ...    |..........|    ...     |
-           | .   |    ...    |    ...    |    ...    |..........|    ...     |
-           | Lp  |  |Lp-N1|  |  |Lp-N2|  |  |Lp-N3|  |..........|  |Lp-Nq|   |
-           |_____|___________|___________|___________|__________|____________|
+             _________________________________________________________________
+            |     |     N1    |     N2    |     N3    |..........|     Nq     |
+            |=====|===========|===========|===========|==========|============|
+            | L1  |  |L1-N1|  |  |L1-N2|  |  |L1-N3|  |..........|  |L1-Nq|   |
+            | L2  |  |L2-N1|  |  |L2-N2|  |  |L2-N3|  |..........|  |L2-Nq|   |
+            | L3  |  |L3-N1|  |  |L3-N2|  |  |L3-N3|  |..........|  |L3-Nq|   |
+            | .   |    ...    |    ...    |    ...    |..........|    ...     |
+            | .   |    ...    |    ...    |    ...    |..........|    ...     |
+            | .   |    ...    |    ...    |    ...    |..........|    ...     |
+            | Lp  |  |Lp-N1|  |  |Lp-N2|  |  |Lp-N3|  |..........|  |Lp-Nq|   |
+            |_____|___________|___________|___________|__________|____________|
             
             where, |Li-Nj| = absolute difference between the ith linear activation time and jth non-linear activation time.
             The function "distance_matrix" nows transfers control to the function "paired_unpaired" using this matrix created.
     """
-    """The function distance_matrix takes the node no. and its list of linear and non-linear activations and find all possible absolute difference between the instants."""
     ln_matrix, nonln_matrix=[], []
     ln_array=list(ln_array.reshape((1, lnt)))
     nonln_array=list(nonln_array.reshape((1, nonlnt)))
@@ -142,7 +141,18 @@ def distance_matrix(ln_array, nonln_array, lnt, nonlnt, node, case, ln_activ_tim
 
 
 def paired_unpaired(matrix_set, node, case, ln_activ_time, ln_nodes, nonln_activ_time, nonln_nodes):
-    """Using the results of distance_matrix, paired_unpaired finds the mutual nearest neighbour pairs among the activation times of the node."""
+    """
+    The salient features of the function "paired_unpaired" are:
+    1. Arguments: "matrix_set" = matrix table of absolute differences between all the linear and non-linear activation times of the given node obtained from function "distance_matrix"
+                  "node" = index of the node of the particular case under study
+                  "case" = the case number under study
+                  "ln_activ_time" = list of all activation times of all nodes in the given case under the linear model of simulation
+                  "ln_nodes" = list of nodes getting activated under linear model of simulation
+                  "nonln_activ_time" = list of all activation times of all nodes in the given case under the non-linear model of simulation
+                  "nonln_nodes" = list of nodes getting activated under non-linear model of simulation
+    2. Returns: None
+    3. Use: 
+    """
     node_paired_unpaired[case][node]={'paired':[], 'unpaired linear':[], 'unpaired non-linear':[]}
     paired_linear_activ_time_instants, paired_nonlinear_activ_time_instants=[], []
     paired_indices_ln, paired_indices_nonln=[], []
