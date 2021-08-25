@@ -239,7 +239,14 @@ def rmse_vs_time_plotter(master_rmse_avg, case):
     
 
 def KDE_all_linear(node_paired_unpaired, case, ln_activ_time):
-    """KDE_all_linear finds the KDE of linear unpaired instants over all nodes in a case"""
+    """
+    The salient features of the function "KDE_all_linear" are:
+    1. Arguments: node_paired_unpaired = dictionary containing info. about the paired instants and the unpaired linear and unpaired nonlinear instants for all nodes in all cases.
+                  case = case no. under study
+                  ln_activ_time = activation times of all nodes under the given case for linear simulation model
+    2. Returns: None
+    3. Use: It determines the non-parametric kernel density estimate of the linear activation times of all nodes under the given case
+    """
     predict_ln=[]
     for i in list(node_paired_unpaired[case].keys()):
         if i in no_info_nodes:
@@ -260,7 +267,14 @@ def KDE_all_linear(node_paired_unpaired, case, ln_activ_time):
     
     
 def KDE_all_nonlinear(node_paired_unpaired, case, nonln_activ_time):
-    """KDE_all_nonlinear finds the KDE of non-linear unpaired instants over all nodes in a case"""
+    """
+    The salient features of the function "KDE_all_nonlinear" are:
+    1. Arguments: node_paired_unpaired = dictionary containing info. about the paired instants and the unpaired linear and unpaired nonlinear instants for all nodes in all cases.
+                  case = case no. under study
+                  nonln_activ_time = activation times of all nodes under the given case for nonlinear simulation model
+    2. Returns: None
+    3. Use: It determines the non-parametric kernel density estimate of the nonlinear activation times of all nodes under the given case
+    """
     predict_nonln=[]
     for i in list(node_paired_unpaired[case].keys()):
         if i in no_info_nodes:
