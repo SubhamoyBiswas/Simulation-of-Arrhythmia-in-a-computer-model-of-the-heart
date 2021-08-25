@@ -312,7 +312,13 @@ def recheck_node_pair_unpair(ndpunp, case, nd):
     
     
 def location_unpaired_nodes(dict_loc, case):
-    """The function location_unpaired_nodes finds the locations of those nodes which got unpaired at least once."""
+    """
+    The salient features of function "location_unpaired_nodes" are:
+    1. Arguments: "dict_loc" = dictionary with keys as the nodes and the values as the X, Y and Z coordinates of them on the left atria
+                  "case" = case no. under study
+    2. Returns: "unpaired_node_loc2" = dictionary of all nodes having at least one unpaired instant.
+    3. Use: In order to form the clusters, the unpaired nodes have to be taken into account. The function figures out these nodes.
+    """
     unpaired_node_loc2={}
     for i in list(dict_loc.keys()):
         i1=int(i)-1
