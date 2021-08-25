@@ -260,7 +260,15 @@ def KDE_all_nonlinear(node_paired_unpaired, case, nonln_activ_time):
     
     
 def recheck_node_pair_unpair(ndpunp, case, nd):
-    """The function recheck_node_pair_unpair refreshes the noda data matrix to remove any sort of discrepancies if any."""
+    """
+    The salient features of the function "recheck_node_pair_unpair" are:
+    1. Arguments: "ndpunp" = conatins information about the paired instants, unpaired linear and unpaired non-linear instants of time of the node under a given case
+                  "case" = case no. under study
+                  "nd" = node no. of the given case under study
+    2. Returns: None
+    3. Use: The function refreshes the very important global data variable "node_paired_unpaired" in case any discrepancy that might have happened during the execution of the code.
+            In other words, it ensures that this variable remains preserved well.
+    """
     a=[]
     for i in ndpunp['unpaired linear']:
         if i not in ndpunp['unpaired non-linear']:
@@ -370,7 +378,15 @@ def neighbour_find_space_and_time(time_thres, neighbours_by_space, node_paired_u
 
 
 def delete_isolated_nodes(neighbours_by_time_space):
-    """The function delete_isolated_nodes deletes all instances of nodes which don't have any neighbours."""
+    """
+    The salient features of the function "delete_isolated_nodes" are:
+    1. Argument: "neighbours_by_time_space" = a dictionary with keys as the node no.s and the values as their corresponding nearest neighbours in space as well as time
+    2. Returns: "final_neighbours" = contains the same dictionary but without the isolated node items
+    3. Use: Isolated nodes are those which either don't have any neighbours in space or have neighbours in space but none in time of unpairing.
+            For the first scenario, these nodes with no space neighbours are already removed from beforehand.
+            But the "neighbours_by_time_space" still contains those node keys which had neighbours in space, but none of them were close in time. So, here, the value will be nil.
+            So we remove these nodes from the data structure as they are of no use to us, in terms of studying about the clusters.
+    """
     final_neighbours={}
     for i in list(neighbours_by_time_space.keys()):
         if len(neighbours_by_time_space[i])!=0:
@@ -380,6 +396,7 @@ def delete_isolated_nodes(neighbours_by_time_space):
 
 def clusters_from_neighbours(final_neighbours):
     """
+    The salient features of the function "clusters_from_neighbours" are:
     1. Argument: "final_neighbours" = dictionary having keys as node no.s and values as the nearest neighbours in both space and time for the nodes under a particular case
     2. Returns: "groups" = list of clusters formed from the list of nearest neighbours of the case
     3. Use: Let us consider that node 0 has neighbours 1, 2, 3, 4 and node 1 has neighbours 2, 4, 5. Since these neighbours are close both in space and time,
