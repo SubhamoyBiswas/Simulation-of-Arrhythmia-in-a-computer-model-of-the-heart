@@ -379,7 +379,29 @@ def delete_isolated_nodes(neighbours_by_time_space):
 
 
 def clusters_from_neighbours(final_neighbours):
-    """The function clusters_from_neighbours finds clusters from the neighbours data."""
+    """
+    1. Argument: "final_neighbours" = dictionary having keys as node no.s and values as the nearest neighbours in both space and time for the nodes under a particular case
+    2. Returns: "groups" = list of clusters formed from the list of nearest neighbours of the case
+    3. Use: Let us consider that node 0 has neighbours 1, 2, 3, 4 and node 1 has neighbours 2, 4, 5. Since these neighbours are close both in space and time,
+            so we can say that neighbours 1, 2, 3, 4 lie in a circle with centre at node 0 and radius=threshold for space neighbours.
+            Similarly, we can imagine another such circle with centre at node 1. 
+            If we think of the problem we can say there is a circle or blob with 0, 1, 2, 3, 4 in it. There is another circle with 1, 2, 4, 5 in it.
+            So both these circles must be intersecting at exactly two points. So considering the total area of the figure formed by the overlapping circles, 
+            we can consider an irregular shaped region on the left atrium containing nodes 0, 1, 2, 3, 4, 5. So this irregular region forms a cluster.
+            Let us consider another example. We have a case with 10 nodes 0, 1, 2, 3, ..., 9. Let the neighbours for each be as follows:
+            node 0 --> 1, 2, 3, 4
+            node 1 --> 2, 4, 5
+            node 2 --> 0, 1, 3, 4
+            node 3 --> 0, 2
+            node 4 --> 1, 2, 5
+            node 5 --> 1, 4
+            node 6 --> 7, 8, 9
+            node 7 --> 6, 8, 9
+            node 8 --> 6, 7
+            node 9 --> 6, 7
+            Here, as per definition, we will be having two such irregular regions, one is [0, 1, 2, 3, 4, 5] and the other is [6, 7, 8, 9].
+            So in the above example, we have two clusters. In this way, using the list of neighbours "final_neighbours", we get our clusters for the required case.    
+    """
     neighbour_groups=[]
     for i in list(final_neighbours.keys()):
         a=[i]
