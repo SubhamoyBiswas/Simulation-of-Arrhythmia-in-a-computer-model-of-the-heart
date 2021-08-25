@@ -403,7 +403,14 @@ def clusters_from_neighbours(final_neighbours):
 
 
 def remove_error_clusters(all_clusters, node_paired_unpaired, case):
-    """The function remove_error_clusters deletes those clusters whose max. activation time exceeds 4950ms."""
+    """
+    The salient features of the function remove_error_clusters are:
+    1. Arguments: "all_clusters" = list of all clusters for the given case under study
+                  "node_paired_unpaired" = complete set of data on the paired instants, unpaired linear and unpaired nonlinear instants of all nodes under all cases
+                  "case" = the case no. under study
+    2. Returns: "edit_clusters" = list of clusters obtained after deletion
+    3. Use: We are not interested in clusters which have maximum activation times lying beyond 4950 ms, given that the range of activation of all nodes can be assumed as 0-5000ms.
+    """
     edit_clusters=[]
     for i in all_clusters:
         flag=0
