@@ -202,7 +202,14 @@ def moving_average(t_val, x_val, interval, n):
 
 
 def spacing_graph(t_val, x_val, del_times):
-    """The function spacing_graph finds the moving averaged RMSE values vs time over all nodes in the case"""
+    """
+    The salient features of the function "spacing_graph" are:
+    1. Arguments: "t_val" = the time instants of paired activations across all nodes in a given case
+                  "x_val" = corresponding RMSE values between paired activation times across all nodes in a given case
+                  "del_times" = time instants not under consideration for creating the final moving average data for RMSE vs time and their corresponding plot
+    2. Returns: "ret_cl" = dictionary with keys as time instants and values as the corresponding moving averaged RMSE 
+    3. Use: This function regulates the process of creating a moving average version of RMSE vs time for all nodes by calling the function "moving_average".
+    """
     ret_cl={}
     for i in range(3501):
         t_ret, x_ret=moving_average(t_val, x_val, [i, i+1499], 100)
@@ -216,7 +223,13 @@ def spacing_graph(t_val, x_val, del_times):
 
 
 def rmse_vs_time_plotter(master_rmse_avg, case):
-    """The function rmse_vs_time_plotter plots the RMSE vs time plot"""
+    """
+    The salient features of the function "rmse_vs_time_plotter" are:
+    1. Arguments: "master_rmse_avg" = dictionary having keys as pairing time instants and values as the corresponding moving average RMSE. 
+                  "case" = case no. under study
+    2. Returns: None
+    3. Use: The function plots moving averaged RMSE vs time for all nodes under a given case.
+    """
     plt.figure(figsize=(14, 10), dpi=400)
     plt.title(f'For case {str(case)} dataset')
     plt.xlabel('Time -->')
