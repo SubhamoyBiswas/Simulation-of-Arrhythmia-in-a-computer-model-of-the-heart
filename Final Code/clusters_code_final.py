@@ -184,7 +184,15 @@ def paired_unpaired(matrix_set, node, case, ln_activ_time, ln_nodes, nonln_activ
 
 
 def moving_average(t_val, x_val, interval, n):
-    """The function moving_average is used to perform moving average operation using a given window length."""
+    """
+    The salient features of the function "moving_average" are:
+    1. Arguments: "t_val" = time variable used for creating windows for moving average
+                  "x_val" = variable to be subjected to moving average operation
+                  "n" = window length for moving average
+    2. Returns: "tm" = the modified time instants against which the moving averaged variable values are to be annoted and plotted
+                "xm" = the modified variable after being smoothed by moving average
+    3. Use: It perform moving average operation to smooth a highly detailed variable using a given window length.
+    """
     dt = (interval[1] - interval[0]) / n
     tm = interval[0] + dt/2 + np.arange(n) * dt
     xm = np.zeros_like(tm)
