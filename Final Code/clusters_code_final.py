@@ -384,7 +384,14 @@ def neighbour_find_space(threshold, unpaired_node_loc2):
 
 
 def find_threshold_time(neighbours_by_space, node_paired_unpaired, case):
-    """The function find_threshold_time finds the threshold to be used for time neighbours. It is usually taken as the lower confidence limit taking 2 std. deviations on the right side of mean line."""
+    """
+    1. Arguments: "neighbours_by_space" =  dictionary having the keys as the node no.s and values as their corresponding neighbours in space coordinates only
+                  "node_paired_unpaired" = dictionary containing info. about the paired instants and the unpaired linear and unpaired nonlinear instants for all nodes in all cases
+                  "case" = case no. under study
+    2. Returns: "limit_shift" = cutoff time for finding the neighbours
+    3. Use: After having found the neighbours in space, we need to select the cutoff time for finding the ones close in time.
+            The cutoff has been taken as 2 std. deviations away on the right side of mean line.
+    """
     min_shift=[]
     for i in list(neighbours_by_space.keys()):
         p1=node_paired_unpaired[case][i]['unpaired linear']
@@ -409,7 +416,15 @@ def find_threshold_time(neighbours_by_space, node_paired_unpaired, case):
     
      
 def neighbour_find_space_and_time(time_thres, neighbours_by_space, node_paired_unpaired, case):
-    """The function neighbour_find_space_and_time finds the neighbours that are not only close in space but also in time."""
+    """
+    1. Arguments: "time_thres" = threshold obtained for finding neighbours in time
+                  "neighbours_by_space" = the dictionary of all nodes in the given and their corresponding space neighbours
+                  "node_paired_unpaired" = dictionary containing info. about the paired instants and the unpaired linear and unpaired nonlinear instants for all nodes in all cases
+                  "case" = case no. under study
+    2. Returns: "neighbours_by_time_space" = dictionary containing nodes and their corresponding neighbours both in space and time
+    3. Use: The entire process of finding neighbours is a two-stepped approach. We have already obtained the space neighbours for each node.
+            Now we need to find which space neighbours are also close in the time of unpairing and discard the rest. 
+    """
     neighbours_by_time_space={}
     for i in list(neighbours_by_space.keys()):
         neighbours_by_time_space[i]=[]
