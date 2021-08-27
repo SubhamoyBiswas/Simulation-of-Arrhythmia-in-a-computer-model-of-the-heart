@@ -331,7 +331,14 @@ def location_unpaired_nodes(dict_loc, case):
 
 
 def find_threshold_space(dict_loc, tri_list):
-    """The function find_threshold_space determines a default value of threshold for space neighbours if in case user hasn't given any threshold as input"""
+    """
+    The salient features of the function "find_threshold_space" are:
+    1. Arguments: "dict_loc" = dictionary with keys as the node no.s and the values as their corresponding X, Y and Z coordinates
+                  "tri_list" = list of data for all triangular meshes of three closest nodes
+    2. Returns: "d95" = the 95th percentile distance value obtained from the KDE of the all the sides of all the triangles in the "tri_list" data structure
+    3. Use: The user has two options - one, where he/she enters the threshold limit for finding neighbors in space and the other, where no value or null has been entered.
+            In the 2nd scenario, we need to supply a default value for the threshold for space. This is the purpose of this function.
+    """
     dist_list2=[]
     for i in tri_list:
         a=math.sqrt((dict_loc[i[1]][0]-dict_loc[i[2]][0])**2 + (dict_loc[i[1]][1]-dict_loc[i[2]][1])**2 + (dict_loc[i[1]][2]-dict_loc[i[2]][2])**2)
@@ -354,7 +361,12 @@ def find_threshold_space(dict_loc, tri_list):
 
 
 def neighbour_find_space(threshold, unpaired_node_loc2):
-    """The function neighbour_find_space finds the neighbours of a node using only x, y and z coordinates."""
+    """
+    The salient features of the function "neighbour_find_space" are:
+    1. Arguments: "threshold" = threshold for finding neighbours in space either given by user or found by default
+                  "unpaired_node_loc2" = stores the locations of the nodes having at least one unpaired time instant
+    2. Returns: "neighbours_by_space" = dictionary having the keys as the node no.s and values as their corresponding neighbours in space coordinates only
+    """
     neighbours_by_space={}
     for i in list(unpaired_node_loc2.keys()):
         min_dist2, fin_data2={}, []
